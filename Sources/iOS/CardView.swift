@@ -29,8 +29,21 @@
 */
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-public class CardView : MaterialPulseView {
+
+open class CardView : MaterialPulseView {
 	/**
 	:name:	dividerLayer
 	*/
@@ -39,16 +52,16 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	dividerColor
 	*/
-	@IBInspectable public var dividerColor: UIColor? {
+	@IBInspectable open var dividerColor: UIColor? {
 		didSet {
-			dividerLayer?.backgroundColor = dividerColor?.CGColor
+			dividerLayer?.backgroundColor = dividerColor?.cgColor
 		}
 	}
 	
 	/**
 	:name:	divider
 	*/
-	@IBInspectable public var divider: Bool = true {
+	@IBInspectable open var divider: Bool = true {
 		didSet {
 			reloadView()
 		}
@@ -57,7 +70,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	dividerInsets
 	*/
-	public var dividerInsetPreset: MaterialEdgeInset = .None {
+	open var dividerInsetPreset: MaterialEdgeInset = .none {
 		didSet {
 			dividerInset = MaterialEdgeInsetToValue(dividerInsetPreset)
 		}
@@ -66,7 +79,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	dividerInset
 	*/
-	@IBInspectable public var dividerInset: UIEdgeInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0) {
+	@IBInspectable open var dividerInset: UIEdgeInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0) {
 		didSet {
 			reloadView()
 		}
@@ -75,7 +88,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	contentInsets
 	*/
-	public var contentInsetPreset: MaterialEdgeInset = .Square2 {
+	open var contentInsetPreset: MaterialEdgeInset = .square2 {
 		didSet {
 			contentInset = MaterialEdgeInsetToValue(contentInsetPreset)
 		}
@@ -84,7 +97,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	contentInset
 	*/
-	@IBInspectable public var contentInset: UIEdgeInsets = MaterialEdgeInsetToValue(.Square2) {
+	@IBInspectable open var contentInset: UIEdgeInsets = MaterialEdgeInsetToValue(.square2) {
 		didSet {
 			reloadView()
 		}
@@ -93,7 +106,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	titleLabelInsets
 	*/
-	public var titleLabelInsetPreset: MaterialEdgeInset = .Square2 {
+	open var titleLabelInsetPreset: MaterialEdgeInset = .square2 {
 		didSet {
 			titleLabelInset = MaterialEdgeInsetToValue(titleLabelInsetPreset)
 		}
@@ -102,7 +115,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	titleLabelInset
 	*/
-	@IBInspectable public var titleLabelInset: UIEdgeInsets = MaterialEdgeInsetToValue(.Square2) {
+	@IBInspectable open var titleLabelInset: UIEdgeInsets = MaterialEdgeInsetToValue(.square2) {
 		didSet {
 			reloadView()
 		}
@@ -111,7 +124,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	titleLabel
 	*/
-	@IBInspectable public var titleLabel: UILabel? {
+	@IBInspectable open var titleLabel: UILabel? {
 		didSet {
 			reloadView()
 		}
@@ -120,7 +133,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	contentViewInsets
 	*/
-	public var contentViewInsetPreset: MaterialEdgeInset = .Square2 {
+	open var contentViewInsetPreset: MaterialEdgeInset = .square2 {
 		didSet {
 			contentViewInset = MaterialEdgeInsetToValue(contentViewInsetPreset)
 		}
@@ -129,7 +142,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	contentViewInset
 	*/
-	@IBInspectable public var contentViewInset: UIEdgeInsets = MaterialEdgeInsetToValue(.Square2) {
+	@IBInspectable open var contentViewInset: UIEdgeInsets = MaterialEdgeInsetToValue(.square2) {
 		didSet {
 			reloadView()
 		}
@@ -138,7 +151,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	contentView
 	*/
-	@IBInspectable public var contentView: UIView? {
+	@IBInspectable open var contentView: UIView? {
 		didSet {
 			reloadView()
 		}
@@ -147,7 +160,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	leftButtonsInsets
 	*/
-	public var leftButtonsInsetPreset: MaterialEdgeInset = .None {
+	open var leftButtonsInsetPreset: MaterialEdgeInset = .none {
 		didSet {
 			leftButtonsInset = MaterialEdgeInsetToValue(leftButtonsInsetPreset)
 		}
@@ -156,7 +169,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	leftButtonsInset
 	*/
-	@IBInspectable public var leftButtonsInset: UIEdgeInsets = MaterialEdgeInsetToValue(.None) {
+	@IBInspectable open var leftButtonsInset: UIEdgeInsets = MaterialEdgeInsetToValue(.none) {
 		didSet {
 			reloadView()
 		}
@@ -165,7 +178,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	leftButtons
 	*/
-	public var leftButtons: Array<UIButton>? {
+	open var leftButtons: Array<UIButton>? {
 		didSet {
 			reloadView()
 		}
@@ -174,7 +187,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	rightButtonsInsets
 	*/
-	public var rightButtonsInsetPreset: MaterialEdgeInset = .None {
+	open var rightButtonsInsetPreset: MaterialEdgeInset = .none {
 		didSet {
 			rightButtonsInset = MaterialEdgeInsetToValue(rightButtonsInsetPreset)
 		}
@@ -183,7 +196,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	rightButtonsInset
 	*/
-	@IBInspectable public var rightButtonsInset: UIEdgeInsets = MaterialEdgeInsetToValue(.None) {
+	@IBInspectable open var rightButtonsInset: UIEdgeInsets = MaterialEdgeInsetToValue(.none) {
 		didSet {
 			reloadView()
 		}
@@ -192,7 +205,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	rightButtons
 	*/
-	public var rightButtons: Array<UIButton>? {
+	open var rightButtons: Array<UIButton>? {
 		didSet {
 			reloadView()
 		}
@@ -230,8 +243,8 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	layoutSublayersOfLayer
 	*/
-	public override func layoutSublayersOfLayer(layer: CALayer) {
-		super.layoutSublayersOfLayer(layer)
+	open override func layoutSublayers(of layer: CALayer) {
+		super.layoutSublayers(of: layer)
 		if self.layer == layer {
 			if divider {
 				var y: CGFloat = contentInset.bottom + dividerInset.bottom
@@ -253,7 +266,7 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	reloadView
 	*/
-	public func reloadView() {
+	open func reloadView() {
 		// clear constraints so new ones do not conflict
 		removeConstraints(constraints)
 		for v in subviews {
@@ -355,12 +368,12 @@ public class CardView : MaterialPulseView {
 		if 0 < leftButtons?.count {
 			verticalFormat += "-(insetC)-[button]"
 			views["button"] = leftButtons![0]
-			metrics["insetC"] = leftButtonsInset.top
+			metrics["insetC"] = leftButtonsInset.top as AnyObject?
 			metrics["insetBottom"] = contentInset.bottom + leftButtonsInset.bottom
 		} else if 0 < rightButtons?.count {
 			verticalFormat += "-(insetC)-[button]"
 			views["button"] = rightButtons![0]
-			metrics["insetC"] = rightButtonsInset.top
+			metrics["insetC"] = rightButtonsInset.top as AnyObject?
 			metrics["insetBottom"] = contentInset.bottom + rightButtonsInset.bottom
 		}
 		
@@ -389,30 +402,30 @@ public class CardView : MaterialPulseView {
 	/**
 	:name:	prepareView
 	*/
-	public override func prepareView() {
+	open override func prepareView() {
 		super.prepareView()
-		depth = .Depth1
+		depth = .depth1
 		dividerColor = MaterialColor.grey.lighten3
-		cornerRadiusPreset = .Radius1
+		cornerRadiusPreset = .radius1
 	}
 	
 	/**
 	:name:	prepareDivider
 	*/
-	internal func prepareDivider(y: CGFloat, width: CGFloat) {
+	internal func prepareDivider(_ y: CGFloat, width: CGFloat) {
 		if nil == dividerLayer {
 			dividerLayer = CAShapeLayer()
 			dividerLayer!.zPosition = 0
 			layer.addSublayer(dividerLayer!)
 		}
-		dividerLayer?.backgroundColor = dividerColor?.CGColor
-		dividerLayer?.frame = CGRectMake(dividerInset.left, y, width - dividerInset.left - dividerInset.right, 1)
+		dividerLayer?.backgroundColor = dividerColor?.cgColor
+		dividerLayer?.frame = CGRect(x: dividerInset.left, y: y, width: width - dividerInset.left - dividerInset.right, height: 1)
 	}
 	
 	/**
 	:name:	prepareProperties
 	*/
-	internal func prepareProperties(image: UIImage?, titleLabel: UILabel?, contentView: UIView?, leftButtons: Array<UIButton>?, rightButtons: Array<UIButton>?) {
+	internal func prepareProperties(_ image: UIImage?, titleLabel: UILabel?, contentView: UIView?, leftButtons: Array<UIButton>?, rightButtons: Array<UIButton>?) {
 		self.image = image
 		self.titleLabel = titleLabel
 		self.contentView = contentView
