@@ -323,7 +323,7 @@ open class MaterialCollectionViewCell : UICollectionViewCell, CAAnimationDelegat
 	property has a value of .Circle when the cornerRadius is set, it will
 	become .None, as it no longer maintains its circle shape.
 	*/
-	open var cornerRadiusPreset: MaterialRadius {
+	open var cornerRadiusPreset: MaterialRadius? {
 		didSet {
 			if let v: MaterialRadius = cornerRadiusPreset {
 				cornerRadius = MaterialRadiusToValue(v)
@@ -518,7 +518,7 @@ open class MaterialCollectionViewCell : UICollectionViewCell, CAAnimationDelegat
 	open func pulse(_ point: CGPoint? = nil) {
 		let p: CGPoint = nil == point ? CGPoint(x: CGFloat(width / 2), y: CGFloat(height / 2)) : point!
 		MaterialAnimation.pulseExpandAnimation(layer, visualLayer: visualLayer, pulseColor: pulseColor, pulseOpacity: pulseOpacity, point: p, width: width, height: height, pulseLayers: &pulseLayers, pulseAnimation: pulseAnimation)
-		MaterialAnimation.delay(0.35) { [weak self] in
+		let _ = MaterialAnimation.delay(0.35) { [weak self] in
 			if let s: MaterialCollectionViewCell = self {
 				MaterialAnimation.pulseContractAnimation(s.layer, visualLayer: s.visualLayer, pulseColor: s.pulseColor, pulseLayers: &s.pulseLayers, pulseAnimation: s.pulseAnimation)
 			}

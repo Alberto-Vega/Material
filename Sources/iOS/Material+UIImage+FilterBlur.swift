@@ -53,8 +53,8 @@ public extension UIImage {
 		
 		let screenScale: CGFloat = MaterialDevice.scale
 		let imageRect: CGRect = CGRect(origin: CGPoint.zero, size: size)
-		let hasBlur: Bool = blurRadius > CGFloat(FLT_EPSILON)
-		let hasSaturationChange: Bool = fabs(saturationDeltaFactor - 1.0) > CGFloat(FLT_EPSILON)
+		let hasBlur: Bool = blurRadius > CGFloat(Float.ulpOfOne)
+		let hasSaturationChange: Bool = fabs(saturationDeltaFactor - 1.0) > CGFloat(Float.ulpOfOne)
 		
 		if hasBlur || hasSaturationChange {
 			UIGraphicsBeginImageContextWithOptions(size, false, screenScale)
@@ -70,7 +70,7 @@ public extension UIImage {
 			
 			if hasBlur {
 				let inputRadius: CGFloat = blurRadius * screenScale
-				var radius: UInt32 = UInt32(floor(inputRadius * 3.0 * CGFloat(sqrt(2 * M_PI)) / 4 + 0.5))
+				var radius: UInt32 = UInt32(floor(inputRadius * 3.0 * CGFloat(sqrt(2 * Double.pi)) / 4 + 0.5))
 				if 1 != radius % 2 {
 					radius += 1 // force radius to be odd so that the three box-blur methodology works.
 				}
